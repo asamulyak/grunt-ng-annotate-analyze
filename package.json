@@ -1,0 +1,43 @@
+{
+  "name": "grunt-ng-annotate-analyze",
+  "description": "Grunt plugin to identify non annotated components",
+  "version": "0.1.0",
+  "homepage": "https://github.com/asamulyak/grunt-ng-annotate-analyze",
+  "author": {
+    "name": "Andriy Samulyak",
+    "email": "a.samulyak@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:asamulyak/grunt-ng-annotate-analyze.git"
+  },
+  "bugs": {
+    "url": "https://github.com/asamulyak/grunt-ng-annotate-analyze/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/asamulyak/grunt-ng-annotate-analyze/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "gruntify-eslint": "^3.1.0",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5",
+    "ng-annotate":"1.2.1",
+    "diff": "3.0.1",
+    "extend": "3.0.0"
+  },
+  "keywords": [
+    "gruntplugin",
+    "ng-annotate",
+    "report"
+  ]
+}

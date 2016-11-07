@@ -1,0 +1,1 @@
+angular.module('app').controller('DashboardController', function Dashboard($location, $routeParams, common, dataservice) {});
