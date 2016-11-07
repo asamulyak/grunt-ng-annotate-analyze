@@ -1,7 +1,7 @@
 {
   "name": "grunt-ng-annotate-analyze",
   "description": "Grunt plugin to identify non annotated components",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": "https://github.com/asamulyak/grunt-ng-annotate-analyze",
   "author": {
     "name": "Andriy Samulyak",
@@ -37,6 +37,11 @@
     "eslint-plugin-angular": "",
     "eslint-config-angular": "",
     "eslint-plugin-jasmine": ""
+  },
+  "dependencies": {
+    "ng-annotate":"1.2.1",
+    "diff": "3.0.1",
+    "extend": "3.0.0"
   },
   "keywords": [
     "gruntplugin",
