@@ -1,7 +1,7 @@
 {
   "name": "grunt-ng-annotate-analyze",
   "description": "Grunt plugin to identify non annotated components",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "homepage": "https://github.com/asamulyak/grunt-ng-annotate-analyze",
   "author": {
     "name": "Andriy Samulyak",
