@@ -49,6 +49,13 @@ Default value: `result.html`
 
 A string value that is used to identify where report should b stored.
 
+#### options.short
+Type: `Boolean`
+Default value: `false`
+
+A boolean value that is used to identify if short report should be generated (only with lines of code that were modified).
+
+
 Also you can add native ng-annotation [options](https://github.com/olov/ng-annotate/blob/master/OPTIONS.md)
 
 

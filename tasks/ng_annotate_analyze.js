@@ -16,12 +16,14 @@ module.exports = function (grunt) {
 
     var reportTMPL = "<style>.ng-annotation-report .count {font-size: 12px; font-weight: normal; color: orangered;}.ng-annotation-report div.file-name{border: 1px solid #cccccc;background-color: #cccccc;padding: 5px 10px;font-style: italic;font-weight: bold;}.ng-annotation-report div.code{border: 1px solid #cccccc;padding: 2px 2px;word-break: break-word;margin-bottom: 15px;}.ng-annotation-report .ln {white-space: nowrap;text-align: right;vertical-align: top;padding: 0 10px;background: #e4e4e4;font-family: monospace;}.ng-annotation-report .code-l {vertical-align: top;padding: 0 10px;color: grey;font-family: monospace;}.ng-annotation-report .add {background-color: #bdffbd;color: green;font-weight: bold;}.ng-annotation-report .remove {background-color: #ffb3b7;color: red;font-weight: bold;}</style>"
 
-    function covertToLinedTable(sourceCode) {
+    function covertToLinedTable(sourceCode, shortReport) {
         var lines = sourceCode.split("~&~");
 
         var tableHTML = "<table>";
         lines.forEach(function (line, index) {
-            tableHTML += "<tr><td class='ln'>" + (index + 1) + "</td><td class='code-l'>" + line + "</td></tr>";
+            if ((line.indexOf("data-changed") != -1 && shortReport) || !shortReport) {
+                tableHTML += "<tr><td class='ln'>" + (index + 1) + "</td><td class='code-l'>" + line + "</td></tr>";
+            }
         })
         tableHTML += "</table>";
 
@@ -31,7 +33,8 @@ module.exports = function (grunt) {
     grunt.registerMultiTask('ng_annotate_analyze', 'Grunt plugin to identify non annotated components', function () {
         var options = this.options({
             fail: false,
-            dest: 'report.html'
+            dest: 'report.html',
+            short: false
         });
 
         var fileWithMissingInjectionCount = 0;
@@ -64,10 +67,15 @@ module.exports = function (grunt) {
                     }
                     var cssClass = part.added ? 'add' :
                         part.removed ? 'remove' : '';
-                    fileResHTML += "<span class='" + cssClass + "'>" + part.value.replace(/\r?\n/g, "</span>~&~<span>").replace(/\s/g, "&nbsp;") + "</span>";
+                    var dataChange = part.added || part.removed;
+                    fileResHTML += "<span " + (dataChange ? "data-changed" : "") + " class='" + cssClass + "'>" + part.value.replace(/\r?\n/g, "</span>~&~<span>").replace(/\s/g, "&nbsp;") + "</span>";
                 });
 
-                reportHTML += "<div class='file-name'>" + filePath + " <span class='count'>(added: " + modificationsCount  + " injections)</span></div><div class='code'>" + covertToLinedTable(fileResHTML) + "</div>";
+                reportHTML +=
+                    "<div class='file-name'>" + filePath +
+                    "  <span class='count'>(added: " + modificationsCount  + " injections)</span>" +
+                    "</div>" +
+                    "<div class='code'>" + covertToLinedTable(fileResHTML, options.short) + "</div>";
 
                 if (modificationsCount > 0) {
                     fileWithMissingInjectionCount++;
